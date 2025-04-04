@@ -14,11 +14,11 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        setIsVisible(false); // Beim Runterscrollen ausblenden
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // Beim Hochscrollen einblenden
-        setFlashBackground(true); // Hintergrundfarbe kurz auf Weiß setzen
-        setTimeout(() => setFlashBackground(false), 2000); // Nach 1000ms smooth ausblenden
+        setIsVisible(true);
+        setFlashBackground(true);
+        setTimeout(() => setFlashBackground(false), 2000);
       }
       setLastScrollY(window.scrollY);
     };
@@ -51,7 +51,7 @@ export const Navigation = () => {
       } ${
         flashBackground
           ? "bg-white transition-colors duration-1000"
-          : "bg-[#f5f7fa] transition-colors duration-1000"
+          : "bg-grey-100 transition-colors duration-1000"
       }`}
     >
       <div className="flex flex-row w-full justify-between items-center py-4">
@@ -61,21 +61,27 @@ export const Navigation = () => {
           </a>
         </div>
         <ul className="hidden lg:flex lg:flex-row lg:gap-6 list-none m-0 p-0 overflow-hidden">
-          {["home", "services", "process", "advantages", "team", "contact"].map(
-            (id) => (
-              <li className="py-4" key={id}>
-                <a
-                  className={`relative font-semibold text-black cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-[-8px] after:h-[2px] after:bg-[#8247ff] after:transition-all after:duration-300 after:transform after:skew-y-[-2deg] ${
-                    activeNavItem === id ? "after:w-full" : "after:w-0"
-                  } hover:after:w-full`}
-                  href={`#${id}`}
-                  onClick={() => setActiveNavItem(id)}
-                >
-                  {id.charAt(0).toUpperCase() + id.slice(1)}
-                </a>
-              </li>
-            )
-          )}
+          {[
+            "home",
+            "hero",
+            "steps",
+            "review",
+            "analysis",
+            "draftreport",
+            "statusreport",
+          ].map((id) => (
+            <li className="py-4" key={id}>
+              <a
+                className={`relative font-semibold text-black cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-[-8px] after:h-[2px] after:bg-[#8247ff] after:transition-all after:duration-300 after:transform after:skew-y-[-2deg] ${
+                  activeNavItem === id ? "after:w-full" : "after:w-0"
+                } hover:after:w-full`}
+                href={`#${id}`}
+                onClick={() => setActiveNavItem(id)}
+              >
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </a>
+            </li>
+          ))}
         </ul>
         <>
           <img
@@ -106,11 +112,13 @@ export const Navigation = () => {
               <ul className="flex flex-col items-center space-y-4 mt-10">
                 {[
                   "home",
-                  "services",
-                  "process",
-                  "advantages",
-                  "team",
-                  "contact",
+                  "hero",
+                  "steps",
+                  "review",
+                  "analysis",
+                  "draftreport",
+                  "statusreport",
+                  "statusreport",
                 ].map((id) => (
                   <li key={id}>
                     <a
