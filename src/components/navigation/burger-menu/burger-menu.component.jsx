@@ -33,11 +33,12 @@ export const BurgerMenu = () => {
           <ul className="flex flex-col items-center space-y-4 mt-10">
             {[
               { name: "Home", href: "#home" },
-              { name: "Leistungen", href: "#services" },
-              { name: "Prozess", href: "#process" },
-              { name: "Vorteile", href: "#advantages" },
-              { name: "Team", href: "#team" },
-              { name: "Kontakt", href: "#contact" },
+              { name: "Produkt", href: "#hero" },
+              { name: "Prozess", href: "#steps" },
+              { name: "Prüfung", href: "#review" },
+              { name: "Analyse", href: "#analysis" },
+              { name: "Musterreport", href: "#draftreport" },
+              { name: "Statusreport", href: "#statusreport" },
             ].map((item) => (
               <li key={item.href}>
                 <a

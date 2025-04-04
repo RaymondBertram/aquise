@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import { GlowProvider } from "./context/glow/glowContext";
-import { Navigation } from "./components/navigation/top-bar/top-bar.component";
+import { Navigation } from "./components";
 import {
   Home,
-  Location,
-  Slider,
-  Services,
-  ProcessDiagramScreen,
-  Solution,
-  Advantages,
-  Team,
-  Form,
+  Hero,
+  Steps,
+  Analysis,
+  Review,
+  Draftreport,
+  Statusreport,
   Footer,
 } from "./screens";
 
@@ -27,18 +24,16 @@ function App() {
   }, []);
 
   return (
-    <div className="xl:container xl:mx-auto">
+    <div className="xl:container-8xl xl:mx-auto">
       <Navigation />
       <div className="relative" style={{ marginTop: `${navHeight}px` }}>
         <Home />
-        <Slider />
-        <Location />
-        <Services />
-        <ProcessDiagramScreen />
-        <Solution />
-        <Advantages />
-        <Team />
-        <Form />
+        <Hero />
+        <Steps />
+        <Review />
+        <Analysis />
+        <Draftreport />
+        <Statusreport />
         <Footer />
       </div>
     </div>
