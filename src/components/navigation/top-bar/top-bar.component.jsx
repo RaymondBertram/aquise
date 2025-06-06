@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BurgerMenu } from "../../index";
-import logo_ipsum from "../../../assets/logos/logoipsum-362.svg";
+import logo_ipsum from "../../../assets/logos/logoipsum_5.svg";
 import burger_menu from "../../../assets/icons/burger.png";
 import close from "../../../assets/icons/close.png";
 

@@ -3,19 +3,17 @@ const config = {
   content: [],
   theme: {
     extend: {
-      keyframes: {
-        slideDown: {
-          "0%": { transform: "translateY(-100%)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+      colors: {
+        primary: {
+          DEFAULT: "#012060", // Hauptfarbe
+          light: "#0141a0", // Hellerer Ton (optional)
+          dark: "#011437", // Dunklerer Ton (optional)
         },
-        fadeOut: {
-          "0%": { transform: "translateY(0)", opacity: "1" },
-          "100%": { transform: "translateY(-100%)", opacity: "0" },
+        secondary: {
+          DEFAULT: "#F2A900", // Sekundärfarbe (z. B. Gelb)
+          light: "#FFD666", // Hellerer Ton (optional)
+          dark: "#B97A00", // Dunklerer Ton (optional)
         },
-      },
-      animation: {
-        "slide-down": "slideDown 0.4s ease-out forwards",
-        "fade-out": "fadeOut 0.4s ease-in forwards",
       },
     },
   },

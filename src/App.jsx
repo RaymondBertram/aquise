@@ -31,7 +31,7 @@ function App() {
         <Hero />
         <Steps />
         <Review />
-        <Analysis />
+        {/* <Analysis />  */}
         <Draftreport />
         <Statusreport />
         <Footer />
