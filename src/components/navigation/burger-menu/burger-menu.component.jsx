@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import burger_menu from "../../../assets/icons/burger.png";
 import close from "../../../assets/icons/close.png";
-import logo_ipsum from "../../../assets/logos/logoipsum-362.svg";
+import logo_ipsum from "../../../assets/logos/logoipsum_5.svg";
 
 export const BurgerMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

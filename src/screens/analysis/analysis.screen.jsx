@@ -2,6 +2,7 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 
 import laptop from "./../../assets/images/laptop_realistic.png";
+import { HeaderSpan } from "../../components/text/header-span/header-span.component";
 
 export const Analysis = () => {
   const isTabletOrLarger = useMediaQuery({ minWidth: 425 });
@@ -14,11 +15,7 @@ export const Analysis = () => {
       <div className="hero-header flex justify-center mb-4 flex-col lg:w-1/4 sm:items-center">
         <h2 className="text-center mb-8">
           POTENZIALANALYSE & {!isLaptopOrLarger ? <br /> : ""}
-          <span>
-            <h2 className="text-4xl font-semibold lg:text-6xl bg-[#0E1A54] text-white inline-block p-2">
-              STANDORTCHECK
-            </h2>
-          </span>
+          <HeaderSpan text={"STANDORTCHECK"} />
         </h2>
         <div className="paragraph">
           <p className="text-center">

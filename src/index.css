@@ -18,7 +18,7 @@
 /* Custom Style for HTML ELEMENTS */
 @layer base {
   h1 {
-    @apply text-4xl font-semibold lg:text-5xl;
+    @apply text-3xl font-semibold;
   }
 
   h2 {
@@ -26,11 +26,11 @@
   }
 
   h3 {
-    @apply text-xl font-bold lg:text-2xl;
+    @apply text-xl font-bold;
   }
 
   p {
-    @apply text-sm md:text-lg lg:text-xl;
+    @apply text-sm;
   }
 }
 
