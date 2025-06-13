@@ -30,7 +30,7 @@
   }
 
   p {
-    @apply text-sm;
+    @apply text-sm text-gray-600;
   }
 }
 
