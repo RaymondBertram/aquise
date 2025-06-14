@@ -23,34 +23,27 @@ export const Statusreport = () => {
       transition={{ duration: 1, ease: "easeInOut" }}
     >
       <motion.div
-        className="hero-img lg:w-1/2 w-full max-w-[700px] relative"
+        className="w-full max-w-[700px] grid grid-cols-[auto_1fr] gap-0 items-center relative"
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
       >
-        <img
-          src={smartphone}
-          alt="Tablet Report"
-          className="w-full h-auto object-contain max-h-[90vh]"
-        />
+        {/* Smartphone-Bild */}
+        <div className="relative z-10 flex justify-end">
+          <img
+            src={smartphone}
+            alt="Tablet Report"
+            className="w-full max-w-[400px] h-auto object-contain max-h-[90vh]"
+          />
+        </div>
 
-        {/* Absolut positionierte Chatbubbles - rechts neben dem Bild */}
-        <img
-          src={bubble1}
-          alt="Bubble 1"
-          className="absolute top-[20%] left-full ml-4 w-50"
-        />
-        <img
-          src={bubble2}
-          alt="Bubble 2"
-          className="absolute top-[42%] left-full ml-4 w-50"
-        />
-        <img
-          src={bubble3}
-          alt="Bubble 3"
-          className="absolute top-[65%] left-full ml-4 w-50"
-        />
+        {/* Chatbubbles */}
+        <div className="flex flex-col gap-6 -ml-10 z-20">
+          <img src={bubble1} alt="Bubble 1" className="w-50" />
+          <img src={bubble2} alt="Bubble 2" className="w-50" />
+          <img src={bubble3} alt="Bubble 3" className="w-50" />
+        </div>
       </motion.div>
 
       <motion.div

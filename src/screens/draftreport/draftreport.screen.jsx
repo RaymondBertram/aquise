@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { HeaderSpan } from "../../components/text/header-span/header-span.component";
 import tablet from "./../../assets/images/tablet.jpg";
+import laptop from "./../../assets/images/laptop_realistic.png";
 
 export const Draftreport = () => {
   const isTabletOrLarger = useMediaQuery({ minWidth: 425 });
@@ -61,14 +62,14 @@ export const Draftreport = () => {
       </motion.div>
 
       <motion.div
-        className="hero-img lg:w-1/2 w-full max-w-[700px] rounded-lg shadow-lg"
+        className="hero-img lg:w-1/2 w-full max-w-[700px]"
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
       >
         <img
-          src={tablet}
+          src={laptop}
           alt="Tablet Report"
           className="w-full h-auto object-contain max-h-[90vh]"
         />
