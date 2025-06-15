@@ -3,6 +3,7 @@ export * from "./analysis/analysis.screen";
 export * from "./review/review.screen";
 export * from "./statusreport/statusreport.screen";
 export * from "./draftreport/draftreport.screen";
+export * from "./analysis/analysis.screen";
 export * from "./steps/steps.screen";
 export * from "./footer/footer.screen";
 export * from "./hero/hero.screen";

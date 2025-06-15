@@ -4,8 +4,8 @@ import {
   Home,
   Hero,
   Steps,
-  Analysis,
   Review,
+  Analysis,
   Draftreport,
   Statusreport,
   Footer,
@@ -31,7 +31,7 @@ function App() {
         <Hero />
         <Steps />
         <Review />
-        {/* <Analysis />  */}
+        <Analysis />
         <Draftreport />
         <Statusreport />
         <Footer />

@@ -1,9 +1,11 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { HeaderSpan } from "../../components/text/header-span/header-span.component";
+import { AndSpan } from "../../components/text/and-span/and-span.component";
 
 import laptop from "./../../assets/images/laptop_realistic.png";
-import { HeaderSpan } from "../../components/text/header-span/header-span.component";
 
 export const Review = () => {
   const isTabletOrLarger = useMediaQuery({ minWidth: 425 });
@@ -19,26 +21,34 @@ export const Review = () => {
       transition={{ duration: 1, ease: "easeInOut" }}
     >
       <motion.div
-        className="hero-header flex justify-center mb-4 flex-col lg:w-1/2 items-center text-center"
+        className="hero-header flex justify-center mb-4 flex-col lg:w-1/2 items-start text-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <h2 className="mb-8">
+        <h2 className="mb-8 text-start text-3xl lg:text-5xl">
           BEBAUBUNGSPLAN PRÜFUNG{" "}
-          {isTabletOrLarger ? "STANDORTANALYSE" : "STANDORT-ANALYSE"} &{" "}
-          {!isLaptopOrLarger ? <br /> : ""}
-          <span className="block">
-            <HeaderSpan text={"BAURECHT"} />
-          </span>
+          <div className="flex">
+            <div className="flex flex-col">
+              <div className="my-1">
+                {isTabletOrLarger ? "STANDORTANALYSE" : "STANDORT-ANALYSE"}{" "}
+                {!isLaptopOrLarger ? <br /> : ""}
+              </div>
+              <HeaderSpan text={"BAURECHT"} />
+            </div>
+            <div className="md:m-2">
+              {" "}
+              <AndSpan />
+            </div>
+          </div>
         </h2>
 
         <div className="paragraph-1 mb-6 max-w-xl text-center">
           <h3 className="text-start mb-4">
             PRÄZISION DER MIETERAQUISE - ÜBER KEY FACTS HINAUSDENKEN
           </h3>
-          <p className="text-center md:text-justify">
+          <p className="text-justify">
             Durch unser spezielles Standortanaylsetool KI und unserer Datenbank
             mit über 7.000 Expansionkriterien deutscher Finalisten, können wir
             mit unserem bewährten System und Eckdaten zu Ihren Gewerbeflächen,
@@ -48,7 +58,7 @@ export const Review = () => {
 
         <div className="paragraph-2 mb-6 max-w-xl text-center">
           <h3 className="text-start mb-4">WARUM IST DAS SO WICHTIG ?</h3>
-          <p className="text-center md:text-justify">
+          <p className="text-justify">
             Baurecht und Bebauungsplan spielen eine entscheidende Rolle bei der
             Auswahl potenzieller Mieter. Sie legen fest, welche Arten von
             Filialisten oder Gewerben baurechtlich überhaupt zugelassen sind.
@@ -57,7 +67,7 @@ export const Review = () => {
             erfolgreiche und langfristige Standortplanung und eine erhebliche
             Zeitersparnis bei der Ansprache.
           </p>
-          <p className="mt-4">
+          <p className="mt-4 text-justify">
             Durch diese fundierte Prüfung schaffen wir Klarheit und vermeiden
             Fehlentscheidungen, bevor sie entstehen.
           </p>
@@ -65,7 +75,7 @@ export const Review = () => {
 
         <div className="paragraph-3 mb-6 max-w-xl text-center">
           <h3 className="text-start mb-4">UNSERE EXPERTISE, IHR VORTEIL.</h3>
-          <p className="text-center md:text-justify">
+          <p className="text-justify">
             Durch diese fundierte Prüfung schaffen wir Klarheit, vermeiden
             Fehlentscheidungen sowie eine zeitintensive Ansprache nicht
             geeigneter Filialisten, bevor sie entstehen.

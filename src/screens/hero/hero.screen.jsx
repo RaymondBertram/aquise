@@ -1,5 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 import laptop from "./../../assets/images/laptop_realistic.png";
@@ -19,13 +20,13 @@ export const Hero = () => {
       transition={{ duration: 1, ease: "easeInOut" }}
     >
       <motion.div
-        className="hero-header flex justify-center mb-4 flex-col lg:w-1/2 items-center text-center"
+        className="hero-header flex justify-center mb-4 flex-col lg:w-1/2 items-start text-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <h2 className="mb-8">
+        <h2 className="mb-8 text-start text-3xl lg:text-5xl">
           SCHNELLE, EFFIZIENTE{" "}
           {isTabletOrLarger ? "STANDORTANALYSE" : "STANDORT-ANALYSE"} &{" "}
           {!isLaptopOrLarger ? <br /> : ""}
@@ -33,7 +34,7 @@ export const Hero = () => {
             <HeaderSpan text={"MIETERAQUISE"} />
           </span>
         </h2>
-        <p className="text-gray-600 max-w-xl">
+        <p className="text-gray-600 max-w-xl text-justify">
           Durch unser spezielles Standortanaylsetool KI und unsere Datenbank mit
           über 7.000 Expansionkriterien deutscher Finalisten, können wir mit
           unserem bewährten System und Eckdaten zu Ihren Gewerbeflächen passende
