@@ -1,0 +1,4 @@
+<svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+  <text x="100" y="35" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#E31E24" text-anchor="middle">WOOLWORTH</text>
+  <path d="M185 40 A 2 2 0 1 1 185 39.9 Z" fill="#E31E24"/>
+</svg>

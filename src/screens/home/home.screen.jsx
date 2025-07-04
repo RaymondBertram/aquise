@@ -2,13 +2,14 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import InfiniteCarousel from "../../components/image-slider/image-slider";
+import { HeaderSpan } from "../../components/text/header-span/header-span.component";
 
+import map from "../../assets/images/map-background.jpg";
 import customer_3 from "./../../assets/logos/customer_3.png";
 import logoipsum_1 from "./../../assets/logos/logoipsum_1.svg";
 import logoipsum_2 from "./../../assets/logos/logoipsum_2.svg";
 import logoipsum_3 from "./../../assets/logos/logoipsum_3.svg";
 import logoipsum_4 from "./../../assets/logos/logoipsum_4.svg";
-import { HeaderSpan } from "../../components/text/header-span/header-span.component";
 
 export const Home = () => {
   const logos = [logoipsum_1, logoipsum_2, logoipsum_3, logoipsum_4];

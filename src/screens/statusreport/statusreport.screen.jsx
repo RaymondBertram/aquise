@@ -1,91 +1,195 @@
 import React from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { useMediaQuery } from "react-responsive";
 
-import { HeaderSpan } from "../../components/text/header-span/header-span.component";
+// ASSETS
 import smartphone from "./../../assets/images/smartphone.png";
-import bubble1 from "./../../assets/images/bubble1.png";
-import bubble2 from "./../../assets/images/bubble2.png";
-import bubble3 from "./../../assets/images/bubble3.png";
 
-export const Statusreport = () => {
-  const isTabletOrLarger = useMediaQuery({ minWidth: 425 });
-  console.log(isTabletOrLarger);
+// ============================================================================
+//  MODULAR COMPONENTS
+// ============================================================================
+
+/**
+ * Reusable component for a highlighted header text.
+ * This would ideally be in `components/text/header-span/header-span.component.jsx`
+ */
+const HeaderSpan = ({ text, className = "" }) => (
+  <span
+    className={`bg-[#0E1A54] text-white font-bold px-4 py-2 inline-block leading-tight ${className}`}
+  >
+    {text}
+  </span>
+);
+
+/**
+ * A styled chat bubble component with responsive sizing.
+ * It's now smaller on mobile and scales up for larger screens.
+ * This would ideally be in `components/chat-bubble/chat-bubble.component.jsx`
+ */
+const ChatBubble = ({ sender = "app", position, children, variants }) => {
+  const baseClasses =
+    // Responsive width: smaller on mobile, larger on desktop
+    "w-48 sm:w-60 lg:w-64 p-4 rounded-2xl shadow-xl backdrop-blur-md text-sm";
+  const senderClasses =
+    sender === "user"
+      ? "bg-green-200/80 text-green-950"
+      : "bg-gray-200/80 text-gray-900";
 
   return (
-    <motion.section
-      id="statusreport"
-      className="min-h-screen flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between px-4 mt-8 md:mt-16 lg:mt-24 mb-8 md:mb-12 lg:mb-16"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}
+    <motion.div
+      className={`absolute z-20 ${position}`} // z-20 places it in front of the phone (z-10)
+      variants={variants}
     >
-      <motion.div
-        className="w-full max-w-[700px] grid grid-cols-[auto_1fr] gap-0 items-center relative"
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+      <div className={`${baseClasses} ${senderClasses}`}>{children}</div>
+    </motion.div>
+  );
+};
+
+/**
+ * The visual column containing the smartphone and chat bubbles.
+ * The bubble positions are now responsive to match their adjusted size.
+ * This would ideally be in `components/status-visual/status-visual.component.jsx`
+ */
+const StatusVisual = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const bubbleVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 100 },
+    },
+  };
+
+  return (
+    <motion.div
+      className="lg:w-1/2 w-full flex justify-center items-center py-12"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      variants={containerVariants}
+    >
+      <div className="relative w-full max-w-[22rem] sm:max-w-md">
+        <motion.img
+          src={smartphone}
+          alt="Smartphone displaying a status report"
+          className="relative z-10 w-full h-auto" // z-10 sets the base layer
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        />
+        {/* Bubbles have responsive positions to match their new sizes */}
+        <ChatBubble
+          sender="app"
+          // Closer on mobile, further on desktop
+          position="top-12 -left-4 sm:-left-8 lg:-left-12"
+          variants={bubbleVariants}
+        >
+          Moin Herr Meyer, wir haben ein neues Feedback eines Filialisten
+          erhalten!
+        </ChatBubble>
+        <ChatBubble
+          sender="user"
+          position="top-1/3 -right-4 sm:-right-8 lg:-right-12"
+          variants={bubbleVariants}
+        >
+          Guten Tag Herr Keller, vielen Dank, schade, aber bald haben wir den
+          passenden! 👍
+        </ChatBubble>
+        <ChatBubble
+          sender="app"
+          position="bottom-20 -left-2 sm:-left-6 lg:-left-10"
+          variants={bubbleVariants}
+        >
+          Selbstverständlich! Unser Team arbeitet unermüdlich daran! 💪
+        </ChatBubble>
+      </div>
+    </motion.div>
+  );
+};
+
+/**
+ * The text column containing headings and descriptive paragraphs.
+ * This would ideally be in `components/status-text/status-text.component.jsx`
+ */
+const StatusText = () => {
+  const textItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.7, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <motion.div
+      className="lg:w-1/2 w-full flex flex-col justify-center"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ staggerChildren: 0.2 }}
+    >
+      <motion.h2
+        className="mb-8 text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight"
+        variants={textItemVariants}
       >
-        {/* Smartphone-Bild */}
-        <div className="relative z-10 flex justify-end">
-          <img
-            src={smartphone}
-            alt="Tablet Report"
-            className="w-full max-w-[400px] h-auto object-contain max-h-[90vh]"
-          />
-        </div>
+        MIETERAQUISE <br className="hidden lg:block" />
+        <HeaderSpan text={"STATUSREPORT"} />
+      </motion.h2>
 
-        {/* Chatbubbles */}
-        <div className="flex flex-col gap-6 -ml-10 z-20">
-          <img src={bubble1} alt="Bubble 1" className="w-50" />
-          <img src={bubble2} alt="Bubble 2" className="w-50" />
-          <img src={bubble3} alt="Bubble 3" className="w-50" />
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="hero-header flex justify-center mb-4 flex-col lg:w-1/2 items-start text-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.8 }}
-      >
-        <h2 className="mb-8 text-start text-3xl lg:text-5xl">
-          MIETERAQUISE {isTabletOrLarger ? <br></br> : " "}{" "}
-          <HeaderSpan text={"STATUSREPORT"} />
-        </h2>
-
-        <div className="paragraph-1 mb-6 max-w-xl text-center">
-          <h3 className="text-start mb-4">
-            Transparente Kommunikation in Echtzeit – Ihr Vorteil in der
-            Mieterakquise
+      <motion.div className="max-w-xl space-y-6" variants={textItemVariants}>
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            Transparente Kommunikation in Echtzeit
           </h3>
-          <p className="text-justify">
-            Mit unserer digitalen und modernen Betreuung bleiben Sie stets auf
-            dem neuesten Stand. Während des gesamten Prozesses der Mieterakquise
-            informieren wir Sie fortlaufend über alle Entwicklungen.
+          <p className="text-gray-700 text-base text-justify">
+            Mit unserer digitalen Betreuung bleiben Sie stets auf dem neuesten
+            Stand. Wir informieren Sie fortlaufend über alle Entwicklungen im
+            Prozess der Mieterakquise.
           </p>
         </div>
-
-        <div className="paragraph-2 mb-6 max-w-xl text-center">
-          <p className="text-justify">
-            Sobald wir Rückmeldungen von den kontaktierten Filialisten erhalten,
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            Direktes Feedback, klare Entscheidungen
+          </h3>
+          <p className="text-gray-700 text-base text-justify">
+            Sobald wir Rückmeldungen von kontaktierten Filialisten erhalten,
             stellen wir Ihnen einen kompakten Report zur Verfügung – per E-Mail
-            oder auf Wunsch auch über WhatsApp. Dabei übermitteln wir Ihnen
-            nicht nur den aktuellen Status, sondern auch konkrete Grund Standort
-            ist zu nah an nächster Filiale und es fehlen ca. 200 m2 sowie 15
-            Einstellplätze Rückmeldungen und Begründungen, sofern diese vom
-            Filialisten mitgeteilt wurden.
-          </p>
-          <p className="mt-4 text-justify">
-            So sorgen wir für maximale Transparenz und Effizienz in der
-            Kommunikation, damit Sie jederzeit den Überblick behalten.
+            oder WhatsApp. Sie erhalten nicht nur den Status, sondern auch
+            konkrete Begründungen, um maximale Transparenz und Effizienz zu
+            gewährleisten.
           </p>
         </div>
       </motion.div>
-    </motion.section>
+    </motion.div>
+  );
+};
+
+// ============================================================================
+//  MAIN SCREEN COMPONENT
+// ============================================================================
+
+export const Statusreport = () => {
+  return (
+    <section
+      id="statusreport"
+      className="min-h-screen w-full bg-white flex items-center justify-center py-16 lg:py-24"
+    >
+      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 px-4 sm:px-6 lg:px-8">
+        <StatusText />
+        <StatusVisual />
+      </div>
+    </section>
   );
 };

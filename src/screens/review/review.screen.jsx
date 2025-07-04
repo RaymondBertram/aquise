@@ -1,101 +1,162 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { HeaderSpan } from "../../components/text/header-span/header-span.component";
-import { AndSpan } from "../../components/text/and-span/and-span.component";
 
-import laptop from "./../../assets/images/laptop_realistic.png";
+// ASSETS
+// The image of the construction/zoning plan.
+import plan from "../../assets/images/plan.jpg";
 
-export const Review = () => {
-  const isTabletOrLarger = useMediaQuery({ minWidth: 425 });
-  const isLaptopOrLarger = useMediaQuery({ minWidth: 1024 });
+// ============================================================================
+//  MODULAR COMPONENTS
+// ============================================================================
+
+/**
+ * Renders a block of text with the new solid background color.
+ * This would ideally be in `components/text/header-span/header-span.component.jsx`
+ */
+const HeaderSpan = ({ text, className = "" }) => (
+  <span
+    className={`bg-[#0E1A54] text-white font-bold px-4 py-2 inline-block leading-tight ${className}`}
+  >
+    {text}
+  </span>
+);
+
+/**
+ * Renders a large, stylized ampersand for the horizontal header layout.
+ * This would ideally be in `components/text/and-span/and-span.component.jsx`
+ */
+const AndSpan = () => (
+  <span className="text-5xl lg:text-6xl font-black text-[#0E1A54]/90 mx-2">
+    &
+  </span>
+);
+
+/**
+ * Renders an informational block with a title and condensed content.
+ * This would ideally be in `components/info-block/info-block.component.jsx`
+ */
+const InfoBlock = ({ title, children, variants }) => (
+  <motion.div className="mb-6 max-w-lg" variants={variants}>
+    <h3 className="text-xl font-semibold text-gray-900 mb-3 tracking-wide">
+      {title}
+    </h3>
+    <div className="text-gray-700 text-base text-justify">{children}</div>
+  </motion.div>
+);
+
+/**
+ * Displays the main review image (the construction plan).
+ * This component now takes up half the screen width on large displays.
+ * This would ideally be in `components/review-image/review-image.component.jsx`
+ */
+const ReviewImage = () => (
+  <motion.div
+    className="lg:w-1/2 w-full flex justify-center items-center p-4"
+    initial={{ opacity: 0, x: -50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 1, ease: "circOut" }}
+  >
+    <img
+      src={plan}
+      alt="Bebauungsplan und Baurecht Dokument"
+      className="w-full h-auto object-contain rounded-lg shadow-2xl max-h-[85vh] max-w-2xl"
+    />
+  </motion.div>
+);
+
+/**
+ * Contains all the textual content for the review section.
+ * The h2 element is updated to display the header spans side-by-side.
+ * This would ideally be in `components/review-text/review-text.component.jsx`
+ */
+const ReviewText = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
   return (
-    <motion.section
-      id="review"
-      className="min-h-screen flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between px-4"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}
+    <motion.div
+      className="lg:w-1/2 w-full flex flex-col items-start"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
     >
-      <motion.div
-        className="hero-header flex justify-center mb-4 flex-col lg:w-1/2 items-start text-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.8 }}
+      <motion.h2
+        className="mb-10 flex flex-col items-start text-4xl lg:text-[2.8rem] font-extrabold text-gray-900 tracking-tight"
+        variants={itemVariants}
       >
-        <h2 className="mb-8 text-start text-3xl lg:text-5xl">
-          BEBAUBUNGSPLAN PRÜFUNG{" "}
-          <div className="flex">
-            <div className="flex flex-col">
-              <div className="my-1">
-                {isTabletOrLarger ? "STANDORTANALYSE" : "STANDORT-ANALYSE"}{" "}
-                {!isLaptopOrLarger ? <br /> : ""}
-              </div>
-              <HeaderSpan text={"BAURECHT"} />
-            </div>
-            <div className="md:m-2">
-              {" "}
-              <AndSpan />
-            </div>
-          </div>
-        </h2>
-
-        <div className="paragraph-1 mb-6 max-w-xl text-center">
-          <h3 className="text-start mb-4">
-            PRÄZISION DER MIETERAQUISE - ÜBER KEY FACTS HINAUSDENKEN
-          </h3>
-          <p className="text-justify">
-            Durch unser spezielles Standortanaylsetool KI und unserer Datenbank
-            mit über 7.000 Expansionkriterien deutscher Finalisten, können wir
-            mit unserem bewährten System und Eckdaten zu Ihren Gewerbeflächen,
-            passende Finalisten und somit potenzielle Mieter selektieren.
-          </p>
+        <span>BEBAUUNGSPLAN</span>
+        <div className="flex items-center flex-wrap mt-2">
+          <HeaderSpan text={"PRÜFUNG"} />
+          <AndSpan />
+          <HeaderSpan text={"BAURECHT"} />
         </div>
+      </motion.h2>
 
-        <div className="paragraph-2 mb-6 max-w-xl text-center">
-          <h3 className="text-start mb-4">WARUM IST DAS SO WICHTIG ?</h3>
-          <p className="text-justify">
-            Baurecht und Bebauungsplan spielen eine entscheidende Rolle bei der
-            Auswahl potenzieller Mieter. Sie legen fest, welche Arten von
-            Filialisten oder Gewerben baurechtlich überhaupt zugelassen sind.
-            Mit diesem Wissen können wir sicherstellen, dass nur geeignete
-            Mieter in Frage kommen – ein wesentlicher Faktor für eine
-            erfolgreiche und langfristige Standortplanung und eine erhebliche
-            Zeitersparnis bei der Ansprache.
-          </p>
-          <p className="mt-4 text-justify">
-            Durch diese fundierte Prüfung schaffen wir Klarheit und vermeiden
-            Fehlentscheidungen, bevor sie entstehen.
-          </p>
-        </div>
+      <InfoBlock title="PRÄZISION, DIE WEITERGEHT" variants={itemVariants}>
+        <p>
+          Wir gehen über die üblichen Kennzahlen hinaus. Unsere Analyse umfasst
+          das Baurecht und den Bebauungsplan, um eine präzise und fundierte
+          Bewertung Ihres Standorts sicherzustellen.
+        </p>
+      </InfoBlock>
 
-        <div className="paragraph-3 mb-6 max-w-xl text-center">
-          <h3 className="text-start mb-4">UNSERE EXPERTISE, IHR VORTEIL.</h3>
-          <p className="text-justify">
-            Durch diese fundierte Prüfung schaffen wir Klarheit, vermeiden
-            Fehlentscheidungen sowie eine zeitintensive Ansprache nicht
-            geeigneter Filialisten, bevor sie entstehen.
-          </p>
-        </div>
-      </motion.div>
+      <InfoBlock title="WARUM DAS ENTSCHEIDEND IST" variants={itemVariants}>
+        <p>
+          Diese Dokumente legen fest, welche Mieter für einen Standort zulässig
+          sind. Unsere Prüfung stellt sicher, dass wir nur passende
+          Interessenten ansprechen – das spart Zeit und legt den Grundstein für
+          eine langfristig erfolgreiche Partnerschaft.
+        </p>
+      </InfoBlock>
 
-      <motion.div
-        className="hero-img lg:w-1/2 w-full max-w-[700px]"
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+      <InfoBlock
+        title="IHR VORTEIL: KLARHEIT & EFFIZIENZ"
+        variants={itemVariants}
       >
-        <img
-          src={laptop}
-          alt="Laptop Review"
-          className="w-full h-auto object-contain max-h-[90vh]"
-        />
-      </motion.div>
-    </motion.section>
+        <p>
+          Unsere Expertise schafft von Anfang an Klarheit. So vermeiden Sie
+          zeitintensive Gespräche mit unpassenden Filialisten und beschleunigen
+          den gesamten Vermietungsprozess.
+        </p>
+      </InfoBlock>
+    </motion.div>
+  );
+};
+
+// ============================================================================
+//  MAIN SCREEN COMPONENT
+// ============================================================================
+
+export const Review = () => {
+  return (
+    <section
+      id="review"
+      className="min-h-screen w-full bg-white flex items-center justify-center py-16 lg:py-24"
+    >
+      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-4 sm:px-6 lg:px-8">
+        {/*
+          Layout matches PDF: Image on the left, Text on the right for large screens.
+          On mobile, Image appears first, followed by Text.
+        */}
+        <ReviewImage />
+        <ReviewText />
+      </div>
+    </section>
   );
 };
