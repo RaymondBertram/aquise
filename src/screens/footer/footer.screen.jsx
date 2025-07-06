@@ -1,4 +1,4 @@
-import logo from "../../assets/logos/custom_logo.png";
+import logo from "../../assets/logos/company_logo.png";
 
 export const Footer = () => {
   return (
@@ -10,7 +10,7 @@ export const Footer = () => {
               <img
                 src={logo}
                 alt="Hello Expansion Logo"
-                className="h-10 w-auto mb-4"
+                className="h-25 w-auto object-contain" // Proportional sizing
               />
             </a>
             <p className="text-sm text-gray-500">
