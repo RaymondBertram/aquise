@@ -92,7 +92,7 @@ export const Steps = () => {
     {
       step: "STEP 3",
       borderColor: "border-pink-500", // Pink from PDF
-      title: "Mieter / Filialist selektieren",
+      title: "Selektion mit AI",
       desc: "Nach Prüfung des Baurechts und der Nutzungsmöglichkeiten sowie Prüfung des Standortes, werden potenzielle Mieter selektiert.",
       img: laptop,
     },
@@ -106,15 +106,15 @@ export const Steps = () => {
     {
       step: "STEP 5",
       borderColor: "border-blue-600", // Color from gradient
-      title: "Verhandlung",
-      desc: "Führung der Mietvertragsverhandlungen mit den interessierten Filialisten bis zur Einigung.",
+      title: "On Repeat",
+      desc: "Durch die AI-unterstützte Selektion, können wir den Prozess für jeden neuen Standort wiederholen und so schnellstmöglich passende Mieter finden.",
       img: laptop,
     },
     {
       step: "STEP 6",
       borderColor: "border-violet-500", // Purple from end of gradient
-      title: "Vertragsabschluss",
-      desc: "Koordination der finalen Vertragsunterzeichnung und erfolgreicher Abschluss des Prozesses.",
+      title: "Mietvertrag",
+      desc: "Der Mietvertrag wird aufgesetzt und der neue Mieter kann einziehen.",
       img: laptop,
     },
   ];
