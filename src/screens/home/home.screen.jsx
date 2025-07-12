@@ -28,19 +28,19 @@ export const Home = () => {
         />
         {/* === ENHANCED HEADING === */}
         <h1 className="text-center flex flex-col lg:flex-row items-center lg:items-baseline justify-center gap-x-4 -tracking-tight">
-          <span className="text-3xl sm:text-6xl lg:text-5xl mt-2 lg:mt-0 text-slate-800">
-            HELLO
+          <span className="text-xl mt-2 lg:mt-0 text-slate-800">
+            "BY" HELLO
           </span>
           <HeaderSpan
             text={"EXPANSION"}
-            className="text-5xl sm:text-6xl lg:text-7xl mt-2 lg:mt-0" // Proportional font size and responsive margin
+            className="text-xl mt-2 lg:mt-0" // Proportional font size and responsive margin
           />
         </h1>
       </div>
       <div>
-        <p className="text-3xl font-medium text-center text-slate-800">
+        <h1 className="text-5xl font-medium text-center text-slate-800">
           DIE DIGITALE MIETERAQUISE
-        </p>
+        </h1>
         <p className="text-center text-lg text-gray-600 mt-4 max-w-xl mx-auto">
           Wir verbinden datenbasierte Standortanalyse mit innovativer
           Akquise-Software für nachhaltige Expansionserfolge.

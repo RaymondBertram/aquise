@@ -153,7 +153,7 @@ const StatusText = () => {
           <h3 className="text-xl font-semibold text-gray-900 mb-3">
             Transparente Kommunikation in Echtzeit
           </h3>
-          <p className="text-gray-700 text-base text-justify">
+          <p className="text-gray-700 text-base">
             Mit unserer digitalen Betreuung bleiben Sie stets auf dem neuesten
             Stand. Wir informieren Sie fortlaufend über alle Entwicklungen im
             Prozess der Mieterakquise.
@@ -163,7 +163,7 @@ const StatusText = () => {
           <h3 className="text-xl font-semibold text-gray-900 mb-3">
             Direktes Feedback, klare Entscheidungen
           </h3>
-          <p className="text-gray-700 text-base text-justify">
+          <p className="text-gray-700 text-base">
             Sobald wir Rückmeldungen von kontaktierten Filialisten erhalten,
             stellen wir Ihnen einen kompakten Report zur Verfügung – per E-Mail
             oder WhatsApp. Sie erhalten nicht nur den Status, sondern auch
@@ -184,7 +184,7 @@ export const Statusreport = () => {
   return (
     <section
       id="statusreport"
-      className="min-h-screen w-full bg-white flex items-center justify-center py-16 lg:py-24"
+      className="w-full flex items-center justify-center bg-slate-50" // min-h-screen
     >
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 px-4 sm:px-6 lg:px-8">
         <StatusText />

@@ -1,43 +1,34 @@
-import logo from "../../assets/logos/company_logo.png";
+import { Link } from "react-router-dom";
+import company_logo from "../../assets/logos/company_logo.png";
 
 export const Footer = () => {
   return (
-    <footer className="w-full bg-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <a href="#home">
-              <img
-                src={logo}
-                alt="Hello Expansion Logo"
-                className="h-25 w-auto object-contain" // Proportional sizing
-              />
-            </a>
-            <p className="text-sm text-gray-500">
-              Copyright © 2024 Hello Expansion. <br /> All rights reserved.
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4 text-sm font-medium text-gray-600">
-            <a href="#hero" className="hover:text-[#0E1A54] transition-colors">
-              Produkt
-            </a>
-            <a href="#steps" className="hover:text-[#0E1A54] transition-colors">
-              Prozess
-            </a>
-            <a
-              href="#review"
-              className="hover:text-[#0E1A54] transition-colors"
-            >
-              Prüfung
-            </a>
-            <a href="#" className="hover:text-[#0E1A54] transition-colors">
-              Impressum
-            </a>
-            <a href="#" className="hover:text-[#0E1A54] transition-colors">
-              Datenschutz
-            </a>
-          </div>
+    <footer className="w-full bg-gray-50">
+      <div className="w-full px-15 pt-15 pb-5 rounded-[18px] md:h-fit flex flex-col-reverse md:flex-row gap-4 items-center md:justify-between md:p-8">
+        <div className="flex flex-col md:flex-row md:gap-4 text-center items-center">
+          <Link to="/">
+            <img
+              className="mb-4 md:m-0"
+              src={company_logo}
+              alt="logo"
+              width={60}
+              height={60}
+            />
+          </Link>
+
+          <p>Copyright © 2025 HELLO EXPANSION. All rights reserved.</p>
         </div>
+        <ul className="list-none p-0 m-0 flex flex-col md:flex-row gap-4 text-center">
+          <li className="font-medium">
+            <Link to="/agb">AGB</Link>
+          </li>
+          <li className="font-medium">
+            <Link to="/datenschutz">Datenschutz</Link>
+          </li>
+          <li className="font-medium">
+            <Link to="/impressum">Impressum</Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );

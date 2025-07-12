@@ -169,7 +169,7 @@ const AnalysisText = () => {
           <h3 className="text-xl font-semibold text-gray-900 mb-3">
             GEZIELTE STANDORTANALYSE
           </h3>
-          <p className="text-gray-700 text-base text-justify">
+          <p className="text-gray-700 text-base">
             Eine fundierte Standortanalyse ist essenziell, um vakante
             Gewerbeflächen optimal zu vermarkten. Wir analysieren die
             Filialisten-Landschaft vor Ort, um Potenziale zu identifizieren und
@@ -180,7 +180,7 @@ const AnalysisText = () => {
           <h3 className="text-xl font-semibold text-gray-900 mb-3">
             VERMIETUNGSQUOTE STEIGERN
           </h3>
-          <p className="text-gray-700 text-base text-justify">
+          <p className="text-gray-700 text-base">
             Zudem bewerten wir die Umzugsbereitschaft bestehender Filialisten,
             etwa bei ungünstiger Lage oder unzureichender Fläche. Diese Aspekte
             fließen in die Selektion ein, um Ihre Vermietungschancen zu
@@ -200,7 +200,7 @@ export const Analysis = () => {
   return (
     <section
       id="analysis"
-      className="min-h-screen w-full bg-gray-50 flex items-center justify-center py-16 lg:py-24"
+      className="w-full bg-gray-50 flex items-center justify-center py-16" // min-h-screen
     >
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-center gap-12 lg:gap-16 px-4 sm:px-6 lg:px-8">
         {/* On mobile, visual is on top. On desktop, text is on the left. */}

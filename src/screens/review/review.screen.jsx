@@ -144,7 +144,7 @@ export const Review = () => {
   return (
     <section
       id="review"
-      className="min-h-screen w-full bg-slate-50 flex items-center justify-center py-20 lg:py-28 overflow-hidden"
+      className="min-h-screen w-full bg-slate-50 flex items-center justify-center py-14 overflow-hidden"
     >
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 px-4 sm:px-6 lg:px-8">
         {/*
