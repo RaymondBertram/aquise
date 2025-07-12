@@ -30,7 +30,7 @@ const HelloExpansionLogo = () => {
       className="flex items-center text-2xl lg:text-3xl font-bold mb-8"
       variants={logoVariants}
     >
-      <span className="tracking-wide text-gray-800">HELLO</span>
+      <span className="tracking-wide text-gray-800"> "BY" HELLO</span>
       <span className="bg-blue-900 text-white px-3 py-1 ml-1 tracking-wide">
         EXPANSION
       </span>
@@ -119,7 +119,7 @@ const HeroText = () => {
       </motion.h2>
 
       <motion.p
-        className="text-gray-700 max-w-xl text-lg text-justify"
+        className="text-gray-700 max-w-xl text-lg"
         variants={textItemVariants}
       >
         Durch unser spezielles Standortanalysetool, KI und unserer Datenbank mit
@@ -132,31 +132,41 @@ const HeroText = () => {
 };
 
 // ============================================================================
-//  MAIN SCREEN COMPONENT
+//  MAIN SCREEN COMPONENT (IMPROVED)
 // ============================================================================
 
 export const Hero = () => {
   return (
+    // IMPROVEMENT:
+    // 1. Set a strict height of one viewport (h-screen).
+    // 2. Use `relative` to be the positioning context for its children.
+    // 3. Add `rounded-3xl` for the curved edges.
+    // 4. Use `overflow-hidden` to clip the inner background to the rounded corners.
     <section
       id="hero"
-      className="relative min-h-screen w-full bg-gray-50/50 overflow-hidden"
+      className="relative min-h-screen w-full bg-slate-50 rounded-t-3xl overflow-hidden py-16"
     >
-      {/* Faint Map Background */}
+      {/* 
+        IMPROVEMENT: Background Map Image
+        - Positioned absolutely to fill the parent `section`.
+        - `z-0` places it behind the content.
+        - `bg-cover` and `bg-center` ensure the image fills the container responsively.
+        - The `style` attribute is the standard way in React to apply a background
+          image from an imported variable.
+      */}
       <div
-        className="absolute inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage: `url(${map})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-10"
+        style={{ backgroundImage: `url(${map})` }}
       />
 
-      {/* Content Container */}
-      <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-4 sm:px-6 lg:px-8">
-        {/* 
-          On large screens (lg): Image on the left, Text on the right.
-          On small screens: Image on top, Text on the bottom (default flex-col behavior).
-        */}
+      {/* 
+        IMPROVEMENT: Content Container
+        - `relative z-10` ensures this container is layered above the background.
+        - `h-full` makes it take up the full height of the parent section.
+        - `flex` with `items-center` and `justify-center` centers the content vertically and horizontally.
+        - Flex direction changes based on screen size (`flex-col lg:flex-row`) for responsiveness.
+      */}
+      <div className="relative z-10 h-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-4 sm:px-6 lg:px-8">
         <HeroImage />
         <HeroText />
       </div>

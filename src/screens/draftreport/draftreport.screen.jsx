@@ -14,7 +14,7 @@ export const Draftreport = () => {
   return (
     <motion.section
       id="draftreport"
-      className="min-h-screen flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between px-4"
+      className="bg-slate-50 flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between px-4 py-16" // min-h-screen
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -33,7 +33,7 @@ export const Draftreport = () => {
         </h2>
 
         <div className="paragraph-1 mb-6 max-w-xl text-center">
-          <p className="text-justify">
+          <p>
             Dieses Beispiel verdeutlicht, wie entscheidend die gründliche
             Prüfung von Baurecht und Bebauungsplan für die erfolgreiche
             Mieterakquise ist.
@@ -41,17 +41,17 @@ export const Draftreport = () => {
         </div>
 
         <div className="paragraph-2 mb-6 max-w-xl text-center">
-          <p className="text-justify">
+          <p>
             Ohne diese Analyse besteht die Gefahr, wertvolle Zeit in die
             Ansprache vermeintlich passender Filialisten zu investieren – von
             der Recherche über die Kontaktaufnahme bis hin zum Nachfassen – nur
             um letztendlich eine Absage zu erhalten.
           </p>
-          <p className="mt-4 text-justify">
+          <p className="mt-4">
             Durch diese fundierte Prüfung schaffen wir Klarheit und vermeiden
             Fehlentscheidungen, bevor sie entstehen.
           </p>
-          <p className="mt-4 text-justify">
+          <p className="mt-4">
             Fehlende oder unzureichende Standortinformationen, insbesondere zum
             Baurecht, führen oft dazu, dass Expansionsabteilungen gar nicht
             reagieren. Eine präzise Vorbereitung ermöglicht es hingegen, direkt

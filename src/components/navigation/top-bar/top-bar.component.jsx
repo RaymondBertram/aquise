@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import logo_ipsum from "../../../assets/logos/company_logo.png";
+import { motion, AnimatePresence } from "framer-motion";
+import company_logo from "../../../assets/logos/company_logo.png";
 import burger_menu from "../../../assets/icons/burger.png";
 import close from "../../../assets/icons/close.png";
 
@@ -11,136 +12,186 @@ export const Navigation = () => {
   const [flashBackground, setFlashBackground] = useState(false);
 
   useEffect(() => {
+    let lastScrollYLocal = lastScrollY;
+    const SCROLL_THRESHOLD = 30;
+
     const handleScroll = () => {
-      // Hide nav on scroll down, show on scroll up
-      if (window.scrollY > 100 && window.scrollY > lastScrollY) {
+      const currentScrollY = window.scrollY;
+      const diff = currentScrollY - lastScrollYLocal;
+
+      // Nur bei größerem Unterschied reagieren
+      if (Math.abs(diff) < SCROLL_THRESHOLD) return;
+
+      if (diff > 0) {
+        // Runterscrollen
         setIsVisible(false);
       } else {
+        // Hochscrollen
         setIsVisible(true);
+        setFlashBackground(true);
+        setTimeout(() => setFlashBackground(false), 2000);
       }
 
-      // Add background flash effect when scrolling up
-      if (window.scrollY < lastScrollY && window.scrollY > 0) {
-        setFlashBackground(true);
-        setTimeout(() => setFlashBackground(false), 1500);
-      }
-      setLastScrollY(window.scrollY);
+      lastScrollYLocal = currentScrollY;
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            setActiveNavItem(id);
+          }
+        });
+      },
+      {
+        threshold: 0.6, // Triggert wenn 60% der Section sichtbar sind
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+  };
+
   return (
     <nav
       id="navigation"
-      className={`fixed top-0 left-0 w-full z-[100] h-20 px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform
-      ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
-      ${
-        flashBackground || window.scrollY > 50
-          ? "bg-white/80 shadow-md backdrop-blur-sm"
-          : "bg-transparent"
+      className={`fixed top-0 left-0 w-full z-[100] px-6 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform ${
+        isVisible
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+      } ${
+        flashBackground
+          ? "bg-[#f7f7f7] transition-colors duration-1000"
+          : "bg-[#ffffff] transition-colors duration-1000"
       }`}
     >
-      <div className="flex h-full w-full max-w-7xl mx-auto items-center justify-between">
-        {/* === Logo === */}
-        <a href="#home" className="flex-shrink-0">
-          <img
-            src={logo_ipsum}
-            alt="Company Logo"
-            className="h-25 w-auto object-contain" // Proportional sizing
-          />
-        </a>
-
-        {/* === Desktop Navigation Links === */}
-        <ul className="hidden lg:flex lg:items-center lg:gap-8 list-none m-0 p-0">
-          {[
-            "home",
-            "hero",
-            "steps",
-            "review",
-            "analysis",
-            "draftreport",
-            "statusreport",
-          ].map((id) => (
-            <li key={id}>
-              <a
-                className={`relative font-semibold text-slate-800 cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-[-6px] after:h-[2px] after:bg-[#8247ff] after:transition-all after:duration-300 after:transform after:skew-y-[-2deg] ${
-                  activeNavItem === id ? "after:w-full" : "after:w-0"
-                } hover:after:w-full`}
-                href={`#${id}`}
-                onClick={() => setActiveNavItem(id)}
-              >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* === Mobile Menu Trigger === */}
-        <div className="lg:hidden">
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            aria-label="Open menu"
-            className="p-2 -mr-2" // Larger tap area
-          >
-            <img src={burger_menu} alt="burger-menu" className="w-6 h-6" />
-          </button>
+      <div className="flex flex-row w-full justify-between items-center md:py-2">
+        <div className="logo-wrapper">
+          <a href="/">
+            <img src={company_logo} alt="logo" className="w-auto h-[80px]" />
+          </a>
         </div>
+        <ul className="hidden lg:flex lg:flex-row lg:gap-6 list-none m-0 p-0 overflow-hidden">
+          {["start", "services", "prozess", "vorteile", "team", "kontakt"].map(
+            (id) => (
+              <li className="py-4" key={id}>
+                <a
+                  className={`relative font-medium text-black cursor-pointer after:content-[''] after:absolute after:left-0 after:bottom-[-8px] after:h-[2px] after:bg-[#6146ff] after:transition-all after:duration-300 after:transform after:skew-y-[-2deg] ${
+                    activeNavItem === id ? "after:w-full" : "after:w-0"
+                  } hover:after:w-full`}
+                  href={`#${id}`}
+                  onClick={() => setActiveNavItem(id)}
+                >
+                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                </a>
+              </li>
+            )
+          )}
+        </ul>
+        <>
+          <img
+            src={burger_menu}
+            alt="burger-menu"
+            className="lg:hidden cursor-pointer relative"
+            width={20}
+            height={20}
+            onClick={() => setIsMenuOpen(true)}
+          />
 
-        {/* === Mobile Menu Overlay === */}
-        {isMenuOpen && (
-          <div className="fixed inset-0 bg-white z-[1000] flex flex-col min-h-screen w-full">
-            {/* Mobile Menu Header */}
-            <div className="flex h-20 items-center justify-between sticky top-0 z-50 bg-white shadow-sm px-4 sm:px-6">
-              <a href="#home" onClick={() => setIsMenuOpen(false)}>
-                <img
-                  src={logo_ipsum}
-                  alt="Company Logo"
-                  className="h-9 w-auto object-contain" // Slightly smaller logo for mobile menu
-                />
-              </a>
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Close menu"
-                className="p-2 -mr-2" // Larger tap area for close button
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: "10%" }}
+                animate={{ opacity: 1, y: "0%" }}
+                exit={{ opacity: 0, y: "10%" }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-white z-[1000] flex flex-col min-h-screen w-full"
               >
-                <img src={close} alt="close-menu" className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Mobile Menu Links */}
-            <ul className="flex flex-col items-center gap-6 mt-12">
-              {[
-                "home",
-                "hero",
-                "steps",
-                "review",
-                "analysis",
-                "draftreport",
-                "statusreport",
-              ].map((id) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className="text-xl font-semibold text-slate-700 hover:text-[#8247ff] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {id.charAt(0).toUpperCase() + id.slice(1)}
+                <div className="flex justify-between items-center bg-white px-6 py-4 sticky top-0 z-50">
+                  <a href="/">
+                    <img
+                      src={company_logo}
+                      alt="logo"
+                      className="w-auto h-[80px]"
+                    />
                   </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+
+                  <button onClick={() => setIsMenuOpen(false)}>
+                    <img src={close} alt="close-menu" width={20} height={20} />
+                  </button>
+                </div>
+
+                <motion.ul
+                  className="flex flex-col items-center space-y-4 mt-10"
+                  initial="hidden"
+                  animate="visible"
+                  variants={listVariants}
+                >
+                  {[
+                    "start",
+                    "services",
+                    "prozess",
+                    "vorteile",
+                    "team",
+                    "kontakt",
+                  ].map((id) => (
+                    <motion.li key={id} variants={itemVariants}>
+                      <a
+                        href={`#${id}`}
+                        className="text-lg font-medium text-gray-700 hover:text-[#8247ff]"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {id.charAt(0).toUpperCase() + id.slice(1)}
+                      </a>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
       </div>
     </nav>
   );

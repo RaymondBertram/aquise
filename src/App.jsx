@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
-import { Navigation } from "./components";
-import {
-  Home,
-  Hero,
-  Steps,
-  Review,
-  Analysis,
-  Draftreport,
-  Statusreport,
-  Footer,
-} from "./screens";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HomePage } from "./pages/home.page";
+import { AGB } from "./pages/agb.page";
+import { Impress } from "./pages/impress.page";
+import { DataProtectionPage } from "./pages/dataprotection.page";
+import { Footer } from "./screens";
 
 import "./App.css";
 
@@ -28,19 +23,19 @@ function App() {
   }, []);
 
   return (
-    <div className="xl:container-8xl xl:mx-auto">
-      <Navigation />
-      <main style={{ paddingTop: `${navHeight}px` }}>
-        <Home />
-        <Hero />
-        <Steps />
-        <Review />
-        <Analysis />
-        <Draftreport />
-        <Statusreport />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="xl:container-8xl xl:mx-auto">
+        <main style={{ paddingTop: `${navHeight}px` }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/agb" element={<AGB />} />
+            <Route path="/impressum" element={<Impress />} />
+            <Route path="/datenschutz" element={<DataProtectionPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
